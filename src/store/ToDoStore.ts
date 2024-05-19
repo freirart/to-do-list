@@ -12,9 +12,13 @@ export const useToDos = () => {
 };
 
 export const useAddToDo = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [{ todos }, setState] = Store.useStore<StoreInterface>();
 
   return (newToDo: ToDo) => {
+    if (todos.find(({ todo }) => todo === newToDo.todo)) {
+      throw new Error('Duplicated!');
+    }
+
     setState((draft) => {
       draft.todos.push(newToDo);
     });
