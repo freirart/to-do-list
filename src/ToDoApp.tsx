@@ -1,28 +1,17 @@
 import AddToDoInput from './components/AddToDoInput/AddToDoInput';
 import Background from './components/Background/Background';
-import { useRemoveToDo, useToDos } from './store/ToDoStore';
+import ListToDos from './components/ListToDos/ListToDos';
+import Store from './store';
 
 export default function ToDoApp() {
-  const todos = useToDos();
-  const removeToDo = useRemoveToDo();
-
   return (
     <Background>
-      <main>
-        <AddToDoInput />
-        <ul>
-          {todos.map(({ id, todo }, index) => (
-            <li key={index}>
-              {id}: {todo}{' '}
-              <button onClick={() => removeToDo(index)}>
-                <span aria-label="Trash bin" role="img">
-                  🗑
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </main>
+      <Store.Provider initialState={{ todos: [] }}>
+        <main className="w-4/5 h-4/5 bg-slate-50 rounded-lg p-10">
+          <AddToDoInput />
+          <ListToDos />
+        </main>
+      </Store.Provider>
     </Background>
   );
 }
