@@ -1,7 +1,8 @@
+import ToDo from '../models/ToDo';
 import Store from './';
 
 interface StoreInterface {
-  todos: string[];
+  todos: ToDo[];
 }
 
 export const useToDos = () => {
@@ -13,7 +14,7 @@ export const useToDos = () => {
 export const useAddToDo = () => {
   const [_, setState] = Store.useStore<StoreInterface>();
 
-  return (newToDo: string) => {
+  return (newToDo: ToDo) => {
     setState((draft) => {
       draft.todos.push(newToDo);
     });

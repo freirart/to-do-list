@@ -4,8 +4,9 @@ import {
   useRemoveToDo,
   useToDos
 } from './store/ToDoStore';
+import ToDo from './models/ToDo';
 
-export default function ToDo() {
+export default function ToDoApp() {
   const todos = useToDos();
   const addToDo = useAddToDo();
   const removeToDo = useRemoveToDo();
@@ -19,7 +20,7 @@ export default function ToDo() {
     const inputValue = input?.value;
 
     if (inputValue) {
-      addToDo(inputValue);
+      addToDo(new ToDo(inputValue));
       input.value = '';
     }
   };
@@ -37,9 +38,9 @@ export default function ToDo() {
         <button type="submit">Add To Do</button>
       </form>
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map(({ id, todo }, index) => (
           <li key={index}>
-            {todo}{' '}
+            {id}: {todo}{' '}
             <button onClick={() => removeToDo(index)}>
               <span aria-label="Trash bin" role="img">
                 🗑
