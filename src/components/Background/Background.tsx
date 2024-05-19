@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ReactFC } from '../../utils/interfaces';
 import ColorSelector from '../ColorSelector/ColorSelector';
 
-const defaultColor = '#ef4444';
+const defaultColor = '#EA5959';
 
 const Background: ReactFC = ({ children }) => {
   const [backgroundColor, setBackgroundColor] =
@@ -10,7 +10,7 @@ const Background: ReactFC = ({ children }) => {
 
   return (
     <div
-      className="h-screen w-screen flex items-center justify-center"
+      className="h-screen w-screen flex items-center justify-center transition-colors"
       style={{ backgroundColor }}
     >
       {children}

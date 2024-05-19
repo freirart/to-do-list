@@ -34,16 +34,23 @@ export default function AddToDoInput() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="add-todo-input">To Do: </label>
-      <input
-        id="add-todo-input"
-        type="text"
-        placeholder="What should you do?"
-        ref={inputField}
-        className={shouldDisplayError ? 'border-red-600' : ''}
-        onChange={disableErrorWhenStartTyping}
-      />
-      <button type="submit">Add To Do</button>
+      <div className="flex">
+        <input
+          type="text"
+          placeholder="What should you do?"
+          ref={inputField}
+          className={`my-5 px-5 py-2 w-full bg-slate-200 text-slate-600 rounded-lg ${
+            shouldDisplayError ? 'border-red-600' : ''
+          }`}
+          onChange={disableErrorWhenStartTyping}
+        />
+        <button
+          className="text-[#EA5959] text-2xl mx-2"
+          type="submit"
+        >
+          +
+        </button>
+      </div>
       {shouldDisplayError ? (
         <span className="text-red-600">
           You already added this to-do!

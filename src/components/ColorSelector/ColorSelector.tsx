@@ -28,7 +28,10 @@ const ColorSelector: FC<ColorSelectorProps> = ({
   return (
     <div className="flex">
       {shouldShowGoDefaultBtn ? (
-        <button className="text-sm underline" onClick={goDefault}>
+        <button
+          className="text-sm underline mr-1"
+          onClick={goDefault}
+        >
           Retornar para o padrão
         </button>
       ) : null}
