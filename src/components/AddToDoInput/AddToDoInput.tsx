@@ -39,8 +39,11 @@ export default function AddToDoInput() {
           type="text"
           placeholder="What should you do?"
           ref={inputField}
-          className={`my-5 px-5 py-2 w-full bg-slate-200 text-slate-600 rounded-lg ${
-            shouldDisplayError ? 'border-red-600' : ''
+          className={`my-5 px-5 py-2 w-full bg-slate-200 border outline-0 text-slate-600
+          rounded-lg ${
+            shouldDisplayError
+              ? 'border-red-600'
+              : 'border-transparent'
           }`}
           onChange={disableErrorWhenStartTyping}
         />
