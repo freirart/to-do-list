@@ -1,21 +1,24 @@
-import { useRemoveToDo, useToDos } from '../../store/ToDoStore';
+import { useToDos } from '../../store/ToDoStore';
+import ListItem from './ListItem/ListItem';
 
 export default function ListToDos() {
   const todos = useToDos();
-  const removeToDo = useRemoveToDo();
 
   return (
-    <ul>
-      {todos.map(({ id, todo }, index) => (
-        <li key={index}>
-          {id}: {todo}{' '}
-          <button onClick={() => removeToDo(index)}>
-            <span aria-label="Trash bin" role="img">
-              🗑
-            </span>
-          </button>
-        </li>
-      ))}
-    </ul>
+    <>
+      {todos.length ? (
+        <ul>
+          {todos.map((todo) => (
+            <li key={todo.id}>
+              <ListItem todo={todo} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex h-full items-center justify-center text-neutral-400">
+          It looks like you have&apos;t add any to-dos :(
+        </div>
+      )}
+    </>
   );
 }
