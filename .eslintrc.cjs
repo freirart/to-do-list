@@ -27,6 +27,20 @@ module.exports = {
     parser: '@typescript-eslint/parser'
   },
   rules: {
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        ignoreRestSiblings: true
+      }
+    ],
+    'prettier/prettier': 1,
+    'no-debugger': 0
   }
 };
