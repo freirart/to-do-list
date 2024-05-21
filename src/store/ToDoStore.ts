@@ -28,9 +28,25 @@ export const useAddToDo = () => {
 export const useRemoveToDo = () => {
   const [_, setState] = Store.useStore<StoreInterface>();
 
-  return (todoIndex: number) => {
+  return (todoId: string) => {
     setState((draft) => {
-      draft.todos.splice(todoIndex, 1);
+      draft.todos = draft.todos.filter((todo) => todo.id !== todoId);
+    });
+  };
+};
+
+export const useToggleIsTodoDone = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (todoId: string, done: boolean) => {
+    setState((draft) => {
+      draft.todos = draft.todos.map((todo) => {
+        if (todo.id === todoId) {
+          todo.done = !done;
+        }
+
+        return todo;
+      });
     });
   };
 };
