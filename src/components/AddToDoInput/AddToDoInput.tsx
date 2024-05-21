@@ -19,6 +19,7 @@ export default function AddToDoInput() {
         addToDo(new ToDo(inputValue));
         input.value = '';
       } catch (err) {
+        console.error('> Error adding todo:', err);
         setShouldDisplayError(true);
       }
     }
@@ -34,28 +35,28 @@ export default function AddToDoInput() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex">
+      <div className="flex my-5">
         <input
           type="text"
           placeholder="What should you do?"
           ref={inputField}
-          className={`my-5 px-5 py-2 w-full bg-slate-200 border outline-0 text-slate-600
+          className={`px-5 py-2 w-full bg-slate-200 border outline-0 text-slate-600
           rounded-lg ${
             shouldDisplayError
-              ? 'border-red-600'
+              ? 'border-primary'
               : 'border-transparent'
           }`}
           onChange={disableErrorWhenStartTyping}
         />
         <button
-          className="text-[#EA5959] text-2xl mx-2"
+          className="text-primary text-2xl p-2 hover:bg-primary/20 rounded"
           type="submit"
         >
           +
         </button>
       </div>
       {shouldDisplayError ? (
-        <span className="text-red-600">
+        <span className="text-primary">
           You already added this to-do!
         </span>
       ) : null}
