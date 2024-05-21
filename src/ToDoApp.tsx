@@ -18,7 +18,7 @@ export default function ToDoApp() {
               <li>College</li>
             </ul>
           </div>
-          <div className="w-5/6 h-full text-zinc-600 p-10">
+          <div className="flex flex-col w-5/6 h-full text-zinc-600 p-10">
             <h1 className="text-3xl text-slate-950 font-semibold">
               All Tasks
             </h1>
