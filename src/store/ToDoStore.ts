@@ -80,9 +80,14 @@ export const useCustomCategories = () => {
 };
 
 export const useAddCustomCategory = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [{ customCategories }, setState] =
+    Store.useStore<StoreInterface>();
 
   return (categoryName: CategoryName) => {
+    if (categoryName in customCategories) {
+      throw new Error('Already added!');
+    }
+
     setState((draft) => {
       draft.customCategories = {
         ...draft.customCategories,
