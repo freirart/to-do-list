@@ -1,5 +1,5 @@
 import { FormEvent, useRef, useState } from 'react';
-import { getDefaultClasses } from '../ListItem';
+import { getDefaultClasses } from '..';
 import { useAddCustomCategory } from '../../../../store/ToDoStore';
 
 export default function AddCategoryInput() {

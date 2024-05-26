@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ReactFC } from '../../utils/interfaces';
-import ColorSelector from '../ColorSelector/ColorSelector';
+import ColorSelector from '../ColorSelector';
 
 const defaultColor = '#EA5959';
 

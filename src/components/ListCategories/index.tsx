@@ -1,6 +1,6 @@
 import ToDo from '../../models/ToDo';
 import { useCustomCategories } from '../../store/ToDoStore';
-import ListItem from './ListItem/ListItem';
+import ListItem from './ListItem';
 
 export interface CategoryInterface {
   name: string;

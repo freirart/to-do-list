@@ -1,8 +1,8 @@
-import AddToDoInput from './components/AddToDoInput/AddToDoInput';
-import Background from './components/Background/Background';
-import ListCategories from './components/ListCategories/ListCategories';
-import ListToDos from './components/ListToDos/ListToDos';
-import PageTitle from './components/PageTitle/PageTitle';
+import AddToDoInput from './components/AddToDoInput';
+import Background from './components/Background';
+import ListCategories from './components/ListCategories';
+import ListToDos from './components/ListToDos';
+import PageTitle from './components/PageTitle';
 
 import Store from './store';
 import { initialState } from './store/ToDoStore';

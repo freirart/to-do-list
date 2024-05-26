@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom/client';
-import ToDoApp from './ToDoApp';
+import ToDoApp from '.';
 
 import './globals.css';
 

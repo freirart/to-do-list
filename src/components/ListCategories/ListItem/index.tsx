@@ -3,8 +3,8 @@ import {
   useUpdateFilterName,
   useUpdateFilteredToDos
 } from '../../../store/ToDoStore';
-import { CategoryInterface } from '../ListCategories';
-import AddCategoryInput from './AddCategoryInput/AddCategoryInput';
+import { CategoryInterface } from '..';
+import AddCategoryInput from './AddCategoryInput';
 
 interface ListItemInterface {
   item: CategoryInterface;

@@ -1,5 +1,5 @@
 import { useToDos } from '../../store/ToDoStore';
-import ListItem from './ListItem/ListItem';
+import ListItem from './ListItem';
 
 export default function ListToDos() {
   const todos = useToDos();
