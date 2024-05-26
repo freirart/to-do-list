@@ -64,7 +64,7 @@ export default function FormDialog({
           <br />
           {shouldDisplayError ? (
             <span className="text-primary">
-              You already added this to-do!
+              You already added this category!
             </span>
           ) : null}
           <div className="flex justify-end mt-4 absolute bottom-5 right-5">

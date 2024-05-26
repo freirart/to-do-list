@@ -1,5 +1,6 @@
 import ToDo from '../../models/ToDo';
 import { useCustomCategories } from '../../store/ToDoStore';
+import { isFilledArray } from '../../utils/helper';
 import ListItem from './ListItem';
 
 export interface CategoryInterface {
@@ -18,9 +19,10 @@ export default function ListCategories() {
     {
       name: 'Categories',
       children: Object.entries(customCategories).map(
-        ([categoryName, categoryInfo]) => ({
+        ([categoryName, { todoIds }]) => ({
           name: categoryName,
-          filterFn: (todo) => categoryInfo.todoIds.includes(todo.id)
+          filterFn: (todo) =>
+            isFilledArray(todoIds) && todoIds.includes(todo.id)
         })
       )
     }

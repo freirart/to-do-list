@@ -4,6 +4,7 @@ import {
   useToggleIsTodoDone
 } from '../../../store/ToDoStore';
 import { LiaTrashSolid } from 'react-icons/lia';
+import CategoryDisplay from './CategoryDisplay';
 
 export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
   const { id, todo, done } = todoProp;
@@ -36,6 +37,7 @@ export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
           className={`transition-colors ${done ? 'line-through text-neutral-400' : ''}`}
         >
           {todo}
+          <CategoryDisplay todoId={id} />
         </span>
         <button
           className="hover:bg-primary/20 rounded-full p-2 mt-[-0.35rem] absolute right-10"
