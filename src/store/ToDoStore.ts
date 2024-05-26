@@ -1,9 +1,21 @@
+import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
+
 import Store from './';
 
 interface StoreInterface {
   todos: ToDo[];
+  filteredToDos: ToDo[];
+  customCategories: CategoryTypeObject;
+  filterName: string;
 }
+
+export const initialState: StoreInterface = {
+  todos: [],
+  filteredToDos: [],
+  customCategories: {},
+  filterName: 'All'
+};
 
 export const useToDos = () => {
   const [{ todos }] = Store.useStore<StoreInterface>();
@@ -47,6 +59,63 @@ export const useToggleIsTodoDone = () => {
 
         return todo;
       });
+    });
+  };
+};
+
+export const useUpdateFilteredToDos = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (filterFn: (todo: ToDo) => boolean) => {
+    setState((draft) => {
+      draft.filteredToDos = draft.todos.filter(filterFn);
+    });
+  };
+};
+
+export const useCustomCategories = () => {
+  const [{ customCategories }] = Store.useStore<StoreInterface>();
+
+  return customCategories;
+};
+
+export const useAddCustomCategory = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (categoryName: CategoryName) => {
+    setState((draft) => {
+      draft.customCategories = {
+        ...draft.customCategories,
+        [categoryName]: { color: 'primary', todoIds: [] }
+      };
+    });
+  };
+};
+
+export const useRemoveCustomCategory = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (categoryName: CategoryName) => {
+    setState((draft) => {
+      if (categoryName in draft.customCategories) {
+        delete draft.customCategories[categoryName];
+      }
+    });
+  };
+};
+
+export const useFilterName = () => {
+  const [{ filterName }] = Store.useStore<StoreInterface>();
+
+  return filterName;
+};
+
+export const useUpdateFilterName = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (newFilterName: string) => {
+    setState((draft) => {
+      draft.filterName = newFilterName;
     });
   };
 };

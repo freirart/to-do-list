@@ -12,7 +12,7 @@ export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
 
   return (
     <div className="flex my-2 flex-nowrap items-center">
-      <label className={'flex cursor-pointer'}>
+      <label className="flex cursor-pointer">
         <input
           className="h-0 w-0 opacity-0"
           defaultChecked={done}
