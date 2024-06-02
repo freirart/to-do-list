@@ -1,5 +1,6 @@
 import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
+import { isFilledArray } from '../utils/helper';
 
 import Store from './';
 
@@ -63,16 +64,6 @@ export const useToggleIsTodoDone = () => {
   };
 };
 
-export const useUpdateFilteredToDos = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
-
-  return (filterFn: (todo: ToDo) => boolean) => {
-    setState((draft) => {
-      draft.filteredToDos = draft.todos.filter(filterFn);
-    });
-  };
-};
-
 export const useCustomCategories = () => {
   const [{ customCategories }] = Store.useStore<StoreInterface>();
 
@@ -94,6 +85,43 @@ export const useAddCustomCategory = () => {
         [categoryName]: { color: 'primary', todoIds: [] }
       };
     });
+  };
+};
+
+export const useUpdateCustomCategory = () => {
+  const [{ todos, customCategories }, setState] =
+    Store.useStore<StoreInterface>();
+
+  return (categoryName: CategoryName, todoId: string) => {
+    if (todos.find((t) => t.id === todoId)) {
+      if (categoryName in customCategories) {
+        const categoriesToUpdate = Object.keys(
+          customCategories
+        ).filter((c) => {
+          const categoryTodoIds = customCategories[c].todoIds;
+
+          return (
+            isFilledArray(categoryTodoIds) &&
+            categoryTodoIds.includes(todoId)
+          );
+        });
+
+        return setState((draft) => {
+          for (const category of categoriesToUpdate) {
+            draft.customCategories[category].todoIds =
+              draft.customCategories[category].todoIds.filter(
+                (id) => id !== todoId
+              );
+          }
+
+          draft.customCategories[categoryName].todoIds.push(todoId);
+        });
+      }
+
+      throw new Error('Category does not exist!');
+    }
+
+    throw new Error('Todo does not exist!');
   };
 };
 
@@ -121,6 +149,16 @@ export const useUpdateFilterName = () => {
   return (newFilterName: string) => {
     setState((draft) => {
       draft.filterName = newFilterName;
+    });
+  };
+};
+
+export const useUpdateFilteredToDos = () => {
+  const [_, setState] = Store.useStore<StoreInterface>();
+
+  return (filterFn: (todo: ToDo) => boolean) => {
+    setState((draft) => {
+      draft.filteredToDos = draft.todos.filter(filterFn);
     });
   };
 };

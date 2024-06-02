@@ -42,6 +42,7 @@ module.exports = {
     ],
     'prettier/prettier': 1,
     'no-debugger': 0,
-    '@typescript-eslint/no-empty-function': 0
+    '@typescript-eslint/no-empty-function': 0,
+    '@typescript-eslint/prefer-nullish-coalescing': 1
   }
 };

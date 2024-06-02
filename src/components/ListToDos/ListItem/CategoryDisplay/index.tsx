@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { useCustomCategories } from '../../../../store/ToDoStore';
+import {
+  useCustomCategories,
+  useUpdateCustomCategory
+} from '../../../../store/ToDoStore';
 import { isFilledArray } from '../../../../utils/helper';
-import CategorySelect from './CategorySelect';
+import CustomSelect from '../../../CustomSelect';
 
 interface CategoryDisplayInterface {
   todoId: string;
@@ -11,49 +14,45 @@ export default function CategoryDisplay({
   todoId
 }: CategoryDisplayInterface) {
   const [willChangeCategory, setWillChangeCategory] = useState(false);
-  const categories = useCustomCategories();
 
-  const todoCategory = Object.keys(categories).find(
+  const rawCategories = useCustomCategories();
+  const categories = Object.keys(rawCategories);
+  const todoCategory = Object.keys(rawCategories).find(
     (categoryName) => {
-      const { todoIds } = categories[categoryName];
+      const { todoIds } = rawCategories[categoryName];
       return isFilledArray(todoIds) && todoIds.includes(todoId);
     }
   );
 
-  const defaultClasses = 'text-sm rounded p-1 ml-2 cursor-pointer';
+  const updateCategories = useUpdateCustomCategory();
 
   const toggleEdit = () =>
     setWillChangeCategory(
       (prevWillChangeCategory) => !prevWillChangeCategory
     );
 
-  if (!willChangeCategory) {
-    if (!todoCategory) {
-      return (
-        <span
-          onClick={toggleEdit}
-          className={defaultClasses + ' bg-slate-200'}
-        >
-          Uncategorized
-        </span>
-      );
-    }
-
+  if (willChangeCategory) {
     return (
-      <span
-        onClick={toggleEdit}
-        className={`${defaultClasses} bg-${categories[todoCategory].color}`}
-      >
-        {todoCategory}
-      </span>
+      <CustomSelect
+        options={categories}
+        onSelect={(newCategory) =>
+          updateCategories(newCategory, todoId)
+        }
+        selectedVal={todoCategory}
+        onBlurCb={toggleEdit}
+      />
     );
   }
 
   return (
-    <CategorySelect
-      defaultClasses={defaultClasses}
-      todoCategory={todoCategory}
-      toggleEdit={toggleEdit}
-    />
+    <span
+      onClick={toggleEdit}
+      data-has-category={Boolean(todoCategory)}
+      className={`text-sm rounded p-1 ml-2 cursor-pointer bg-slate-200
+        data-[has-category=true]:bg-primary
+        data-[has-category=true]:text-slate-50`}
+    >
+      {todoCategory ?? 'Uncategorized'}
+    </span>
   );
 }
