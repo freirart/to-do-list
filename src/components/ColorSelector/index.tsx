@@ -1,39 +1,53 @@
-import { ChangeEvent, FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
 
 import styles from './styles.module.less';
 
 interface ColorSelectorProps {
   setNewColor: (v: string) => void;
   defaultColor?: string;
+  isHex?: boolean;
 }
 
 const ColorSelector: FC<ColorSelectorProps> = ({
   setNewColor,
-  defaultColor
+  defaultColor,
+  isHex = true
 }) => {
   const [wasBtnClicked, setWasBtnClicked] = useState(false);
-  const inputValue = useRef<HTMLInputElement>(null);
+  const [updatedColor, setUpdatedColor] = useState(
+    defaultColor ?? ''
+  );
 
   const shouldShowGoDefaultBtn =
     !wasBtnClicked &&
     defaultColor &&
-    inputValue.current &&
-    inputValue.current.value !== defaultColor;
+    updatedColor &&
+    updatedColor !== defaultColor;
 
   const goDefault = () => {
     if (shouldShowGoDefaultBtn) {
       setWasBtnClicked(true);
-      setNewColor(defaultColor);
-      inputValue.current.value = defaultColor;
+      updateColor(defaultColor);
+      setUpdatedColor(defaultColor);
     }
   };
 
-  const updateColor = (e: ChangeEvent<HTMLInputElement>) => {
+  const updateColor = (hexColor: string) => {
     if (wasBtnClicked) {
       setWasBtnClicked(false);
     }
 
-    setNewColor(e.target.value);
+    setUpdatedColor(hexColor);
+
+    if (isHex) {
+      setNewColor(hexColor);
+    } else {
+      const r = parseInt(hexColor.slice(1, 3), 16);
+      const g = parseInt(hexColor.slice(3, 5), 16);
+      const b = parseInt(hexColor.slice(5, 7), 16);
+
+      setNewColor(`${r} ${g} ${b}`);
+    }
   };
 
   return (
@@ -44,11 +58,10 @@ const ColorSelector: FC<ColorSelectorProps> = ({
         </button>
       ) : null}
       <input
-        ref={inputValue}
         className={styles.colorInput}
         type="color"
-        onChange={updateColor}
-        defaultValue={defaultColor}
+        onChange={(e) => updateColor(e.target.value)}
+        value={updatedColor}
       />
     </div>
   );

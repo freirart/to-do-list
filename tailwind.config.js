@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#EA5959'
+        primary: 'rgb(var(--color-primary) / <alpha-value>)'
       }
     }
   },

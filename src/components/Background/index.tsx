@@ -1,23 +1,27 @@
-import { useState } from 'react';
 import { ReactFC } from '../../utils/interfaces';
 import ColorSelector from '../ColorSelector';
 
 const defaultColor = '#EA5959';
 
 const Background: ReactFC = ({ children }) => {
-  const [backgroundColor, setBackgroundColor] =
-    useState(defaultColor);
+  const updatePrimaryColor = (newColor: string) => {
+    document.documentElement.style.setProperty(
+      '--color-primary',
+      newColor
+    );
+  };
 
   return (
     <div
-      className="h-screen w-screen flex items-center justify-center transition-colors"
-      style={{ backgroundColor }}
+      className="h-screen bg-primary w-screen flex items-center justify-center
+        transition-colors"
     >
       {children}
       <div className="absolute bottom-8 right-8">
         <ColorSelector
-          setNewColor={setBackgroundColor}
+          setNewColor={updatePrimaryColor}
           defaultColor={defaultColor}
+          isHex={false}
         />
       </div>
     </div>
