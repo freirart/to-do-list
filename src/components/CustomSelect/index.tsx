@@ -63,7 +63,6 @@ export default function CustomSelect({
 
   const handleSelect = (opt: string) => {
     onSelect(opt);
-    setIsDropDownShown(false);
     onBlurCb();
   };
 
@@ -71,6 +70,7 @@ export default function CustomSelect({
     <div className="inline-block relative ml-2 text-sm">
       <input
         type="text"
+        autoFocus
         value={filter}
         onChange={(e) => setFilter(e.target.value)}
         onFocus={() => setIsDropDownShown(true)}
@@ -78,7 +78,7 @@ export default function CustomSelect({
         className="h-4 w-full outline-none rounded py-[0.875rem] px-2 bg-slate-200"
       />
 
-      {/* hidden paragraph to determine parents width since the options are */}
+      {/* hidden paragraph to determine parents width since options are */}
       {/* rendered in an absolute positioned div */}
       {isFilledArray(filteredOptions) ? (
         filteredOptions.map((opt, index) => (

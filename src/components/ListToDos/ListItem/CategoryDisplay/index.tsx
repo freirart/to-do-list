@@ -35,9 +35,10 @@ export default function CategoryDisplay({
     return (
       <CustomSelect
         options={categories}
-        onSelect={(newCategory) =>
-          updateCategories(newCategory, todoId)
-        }
+        onSelect={(newCategory) => {
+          toggleEdit();
+          updateCategories(newCategory, todoId);
+        }}
         selectedVal={todoCategory}
         onBlurCb={toggleEdit}
       />
