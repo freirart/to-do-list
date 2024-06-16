@@ -1,22 +1,41 @@
 import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
 import { isFilledArray } from '../utils/helper';
+import { FilterFn } from '../utils/interfaces';
 
 import Store from './';
 
 interface StoreInterface {
   todos: ToDo[];
-  filteredToDos: ToDo[];
   customCategories: CategoryTypeObject;
   filterName: string;
+  filterFn: FilterFn;
 }
 
-export const initialState: StoreInterface = {
-  todos: [],
-  filteredToDos: [],
-  customCategories: {},
-  filterName: 'All'
+const _getInitialState = (): StoreInterface => {
+  const defaultState = {
+    todos: [],
+    customCategories: {},
+    filterName: 'All',
+    filterFn: () => true
+  };
+
+  const storedState = localStorage.getItem('appState');
+
+  if (storedState) {
+    try {
+      const parsed = JSON.parse(storedState) as StoreInterface;
+
+      return { ...defaultState, ...parsed };
+    } catch (err) {
+      console.error('> Error loading state from localStorage:', err);
+    }
+  }
+
+  return defaultState;
 };
+
+export const initialState = _getInitialState();
 
 const _useStore = () => Store.useStore<StoreInterface>();
 
@@ -154,17 +173,17 @@ export const useUpdateFilterName = () => {
 };
 
 export const useFilteredToDos = () => {
-  const [{ filteredToDos }] = _useStore();
+  const [{ todos, filterFn }] = _useStore();
 
-  return filteredToDos;
+  return todos.filter(filterFn);
 };
 
-export const useUpdateFilteredToDos = () => {
+export const useUpdateFilterFn = () => {
   const [_, setState] = _useStore();
 
-  return (filterFn: (todo: ToDo) => boolean) => {
+  return (newFilterFn: FilterFn) => {
     setState((draft) => {
-      draft.filteredToDos = draft.todos.filter(filterFn);
+      draft.filterFn = newFilterFn;
     });
   };
 };

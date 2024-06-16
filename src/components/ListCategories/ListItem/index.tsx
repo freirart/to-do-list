@@ -1,7 +1,7 @@
 import {
   useFilterName,
   useUpdateFilterName,
-  useUpdateFilteredToDos
+  useUpdateFilterFn
 } from '../../../store/ToDoStore';
 import { CategoryInterface } from '..';
 import AddCategoryInput from './AddCategoryInput';
@@ -20,11 +20,11 @@ export default function ListItem({ item }: ListItemInterface) {
   const filterName = useFilterName();
   const updateFilterName = useUpdateFilterName();
 
-  const updateFilteredToDos = useUpdateFilteredToDos();
+  const updateFilterFn = useUpdateFilterFn();
 
   const getOnClickFn = (itemParam: CategoryInterface) => () => {
     if (itemParam.filterFn) {
-      updateFilteredToDos(itemParam.filterFn);
+      updateFilterFn(itemParam.filterFn);
     }
 
     updateFilterName(itemParam.name);

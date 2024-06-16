@@ -5,7 +5,8 @@ import {
   FC,
   ReactNode,
   SetStateAction,
-  Dispatch
+  Dispatch,
+  useEffect
 } from 'react';
 
 import { useImmer } from 'use-immer';
@@ -23,8 +24,12 @@ export default function makeStore() {
 
     const contextValue = useMemo(
       () => [state, setState] as ContextType,
-      [state]
+      [state, setState]
     );
+
+    useEffect(() => {
+      localStorage.setItem('appState', JSON.stringify(state));
+    }, [state]);
 
     return (
       <context.Provider value={contextValue}>
