@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import {
   useCustomCategories,
-  useUpdateCustomCategory
+  useCategorizeToDo,
+  useUncategorizeToDo
 } from '../../../../store/ToDoStore';
 import { isFilledArray } from '../../../../utils/helper';
 import CustomSelect from '../../../CustomSelect';
@@ -14,6 +15,8 @@ export default function CategoryDisplay({
   todoId
 }: CategoryDisplayInterface) {
   const [willChangeCategory, setWillChangeCategory] = useState(false);
+  const [shouldDisplayRemoveBtn, setShouldDisplayRemoveBtn] =
+    useState(false);
 
   const rawCategories = useCustomCategories();
   const categories = Object.keys(rawCategories);
@@ -24,7 +27,8 @@ export default function CategoryDisplay({
     }
   );
 
-  const updateCategories = useUpdateCustomCategory();
+  const categorizeToDo = useCategorizeToDo();
+  const uncategorizeToDo = useUncategorizeToDo();
 
   const toggleEdit = () =>
     setWillChangeCategory(
@@ -37,7 +41,7 @@ export default function CategoryDisplay({
         options={categories}
         onSelect={(newCategory) => {
           toggleEdit();
-          updateCategories(newCategory, todoId);
+          categorizeToDo(newCategory, todoId);
         }}
         selectedVal={todoCategory}
         onBlurCb={toggleEdit}
@@ -47,13 +51,26 @@ export default function CategoryDisplay({
 
   return (
     <span
-      onClick={toggleEdit}
       data-has-category={Boolean(todoCategory)}
-      className={`text-sm rounded p-1 ml-2 cursor-pointer bg-slate-200
+      data-remove={todoCategory && shouldDisplayRemoveBtn}
+      className="relative flex ml-2 rounded bg-slate-200
         data-[has-category=true]:bg-primary
-        data-[has-category=true]:text-slate-50`}
+        data-[has-category=true]:text-slate-50 items-center px-1 text-sm pr-1
+        data-[remove=true]:pr-4 cursor-pointer"
+      onMouseEnter={() => setShouldDisplayRemoveBtn(true)}
+      onMouseLeave={() => setShouldDisplayRemoveBtn(false)}
     >
-      {todoCategory ?? 'Uncategorized'}
+      <span onClick={toggleEdit} className="p-1">
+        {todoCategory ?? 'Uncategorized'}
+      </span>
+      {todoCategory && shouldDisplayRemoveBtn ? (
+        <span
+          onClick={() => uncategorizeToDo(todoId, todoCategory)}
+          className="text-sm absolute right-0 p-1 cursor-pointer bg-white/10"
+        >
+          X
+        </span>
+      ) : null}
     </span>
   );
 }

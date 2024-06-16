@@ -26,7 +26,12 @@ const _getInitialState = (): StoreInterface => {
     try {
       const parsed = JSON.parse(storedState) as StoreInterface;
 
-      return { ...defaultState, ...parsed };
+      return {
+        ...defaultState,
+        ...parsed,
+        filterName: 'All',
+        filterFn: () => true
+      };
     } catch (err) {
       console.error('> Error loading state from localStorage:', err);
     }
@@ -108,7 +113,27 @@ export const useAddCustomCategory = () => {
   };
 };
 
-export const useUpdateCustomCategory = () => {
+export const useDefineCategoryFilterFn = () => {
+  const [{ customCategories }] = _useStore();
+
+  return (
+    categoryName: CategoryName,
+    categories: CategoryTypeObject = customCategories
+  ) => {
+    if (categoryName in categories) {
+      const { todoIds } = categories[categoryName];
+
+      return (todo?: ToDo) =>
+        Boolean(
+          todo && isFilledArray(todoIds) && todoIds.includes(todo.id)
+        );
+    }
+
+    return () => true;
+  };
+};
+
+export const useCategorizeToDo = () => {
   const [{ todos, customCategories }, setState] = _useStore();
 
   return (categoryName: CategoryName, todoId: string) => {
@@ -125,7 +150,7 @@ export const useUpdateCustomCategory = () => {
           );
         });
 
-        return setState((draft) => {
+        setState((draft) => {
           for (const category of categoriesToUpdate) {
             draft.customCategories[category].todoIds =
               draft.customCategories[category].todoIds.filter(
@@ -135,12 +160,51 @@ export const useUpdateCustomCategory = () => {
 
           draft.customCategories[categoryName].todoIds.push(todoId);
         });
+      } else {
+        throw new Error('Category does not exist!');
       }
-
-      throw new Error('Category does not exist!');
+    } else {
+      throw new Error('Todo does not exist!');
     }
+  };
+};
 
-    throw new Error('Todo does not exist!');
+export const useUncategorizeToDo = () => {
+  const [{ todos, customCategories }, setState] = _useStore();
+  const defineFilterFn = useDefineCategoryFilterFn();
+
+  return (todoId: string, oldCategory: CategoryName) => {
+    const todo = todos.find((t) => t.id === todoId);
+
+    if (todo) {
+      const categoriesToUpdate = Object.keys(customCategories).filter(
+        (c) => {
+          const categoryTodoIds = customCategories[c].todoIds;
+
+          return (
+            isFilledArray(categoryTodoIds) &&
+            categoryTodoIds.includes(todoId)
+          );
+        }
+      );
+
+      setState((draft) => {
+        for (const categoryName of categoriesToUpdate) {
+          const { todoIds: categoryToDos } =
+            customCategories[categoryName];
+
+          draft.customCategories[categoryName].todoIds =
+            categoryToDos.filter((id) => id !== todoId);
+        }
+
+        draft.filterFn = defineFilterFn(
+          oldCategory,
+          draft.customCategories
+        );
+      });
+    } else {
+      throw new Error('Todo does not exist!');
+    }
   };
 };
 

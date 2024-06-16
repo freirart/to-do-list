@@ -1,5 +1,8 @@
-import { useCustomCategories } from '../../store/ToDoStore';
-import { isFilledArray } from '../../utils/helper';
+import {
+  useCustomCategories,
+  useDefineCategoryFilterFn
+} from '../../store/ToDoStore';
+
 import { FilterFn } from '../../utils/interfaces';
 import ListItem from './ListItem';
 
@@ -11,6 +14,7 @@ export interface CategoryInterface {
 
 export default function ListCategories() {
   const customCategories = useCustomCategories();
+  const defineFilterFn = useDefineCategoryFilterFn();
 
   const categoriesMap: CategoryInterface[] = [
     { name: 'All', filterFn: () => true },
@@ -18,17 +22,10 @@ export default function ListCategories() {
     { name: 'Done', filterFn: (todo) => Boolean(todo?.done) },
     {
       name: 'Categories',
-      children: Object.entries(customCategories).map(
-        ([categoryName, { todoIds }]) => ({
-          name: categoryName,
-          filterFn: (todo) =>
-            Boolean(
-              todo &&
-                isFilledArray(todoIds) &&
-                todoIds.includes(todo.id)
-            )
-        })
-      )
+      children: Object.keys(customCategories).map((categoryName) => ({
+        name: categoryName,
+        filterFn: defineFilterFn(categoryName)
+      }))
     }
   ];
 
