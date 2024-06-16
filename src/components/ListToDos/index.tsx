@@ -1,14 +1,18 @@
-import { useToDos } from '../../store/ToDoStore';
+import {
+  useFilterName,
+  useFilteredToDos
+} from '../../store/ToDoStore';
 import ListItem from './ListItem';
 
 export default function ListToDos() {
-  const todos = useToDos();
+  const filteredToDos = useFilteredToDos();
+  const filterName = useFilterName();
 
   return (
     <>
-      {todos.length ? (
+      {filteredToDos.length ? (
         <ul>
-          {todos.map((todo) => (
+          {filteredToDos.map((todo) => (
             <li key={todo.id}>
               <ListItem todo={todo} />
             </li>
@@ -16,7 +20,9 @@ export default function ListToDos() {
         </ul>
       ) : (
         <div className="flex h-full items-center justify-center text-neutral-400">
-          It looks like you have&apos;t add any to-dos :(
+          {filterName === 'All'
+            ? "It looks like you haven't add any to-dos :("
+            : `There are no to-dos in "${filterName}".`}
         </div>
       )}
     </>

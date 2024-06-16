@@ -18,14 +18,16 @@ export const initialState: StoreInterface = {
   filterName: 'All'
 };
 
+const _useStore = () => Store.useStore<StoreInterface>();
+
 export const useToDos = () => {
-  const [{ todos }] = Store.useStore<StoreInterface>();
+  const [{ todos }] = _useStore();
 
   return todos;
 };
 
 export const useAddToDo = () => {
-  const [{ todos }, setState] = Store.useStore<StoreInterface>();
+  const [{ todos }, setState] = _useStore();
 
   return (newToDo: ToDo) => {
     if (todos.find(({ todo }) => todo === newToDo.todo)) {
@@ -39,7 +41,7 @@ export const useAddToDo = () => {
 };
 
 export const useRemoveToDo = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [_, setState] = _useStore();
 
   return (todoId: string) => {
     setState((draft) => {
@@ -49,7 +51,7 @@ export const useRemoveToDo = () => {
 };
 
 export const useToggleIsTodoDone = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [_, setState] = _useStore();
 
   return (todoId: string, done: boolean) => {
     setState((draft) => {
@@ -65,14 +67,13 @@ export const useToggleIsTodoDone = () => {
 };
 
 export const useCustomCategories = () => {
-  const [{ customCategories }] = Store.useStore<StoreInterface>();
+  const [{ customCategories }] = _useStore();
 
   return customCategories;
 };
 
 export const useAddCustomCategory = () => {
-  const [{ customCategories }, setState] =
-    Store.useStore<StoreInterface>();
+  const [{ customCategories }, setState] = _useStore();
 
   return (categoryName: CategoryName) => {
     if (categoryName in customCategories) {
@@ -89,8 +90,7 @@ export const useAddCustomCategory = () => {
 };
 
 export const useUpdateCustomCategory = () => {
-  const [{ todos, customCategories }, setState] =
-    Store.useStore<StoreInterface>();
+  const [{ todos, customCategories }, setState] = _useStore();
 
   return (categoryName: CategoryName, todoId: string) => {
     if (todos.find((t) => t.id === todoId)) {
@@ -126,7 +126,7 @@ export const useUpdateCustomCategory = () => {
 };
 
 export const useRemoveCustomCategory = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [_, setState] = _useStore();
 
   return (categoryName: CategoryName) => {
     setState((draft) => {
@@ -138,13 +138,13 @@ export const useRemoveCustomCategory = () => {
 };
 
 export const useFilterName = () => {
-  const [{ filterName }] = Store.useStore<StoreInterface>();
+  const [{ filterName }] = _useStore();
 
   return filterName;
 };
 
 export const useUpdateFilterName = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [_, setState] = _useStore();
 
   return (newFilterName: string) => {
     setState((draft) => {
@@ -153,8 +153,14 @@ export const useUpdateFilterName = () => {
   };
 };
 
+export const useFilteredToDos = () => {
+  const [{ filteredToDos }] = _useStore();
+
+  return filteredToDos;
+};
+
 export const useUpdateFilteredToDos = () => {
-  const [_, setState] = Store.useStore<StoreInterface>();
+  const [_, setState] = _useStore();
 
   return (filterFn: (todo: ToDo) => boolean) => {
     setState((draft) => {
