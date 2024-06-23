@@ -11,12 +11,6 @@ interface ListItemInterface {
   isChild?: boolean;
 }
 
-export const getDefaultClasses = () => `
-  cursor-pointer 
-  hover:text-primary/50 
-  transition-colors
-`;
-
 export default function ListItem({
   item,
   isChild

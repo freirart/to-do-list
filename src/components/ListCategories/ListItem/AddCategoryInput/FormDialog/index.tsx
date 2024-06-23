@@ -55,7 +55,7 @@ export default function FormDialog({
               `bg-slate-200 border outline-0 text-slate-600 rounded-md w-full p-2
               my-2` +
               (shouldDisplayError
-                ? ' border-primary'
+                ? ' border-red-500'
                 : ' border-transparent')
             }
             ref={newCategoryInput}
@@ -63,7 +63,7 @@ export default function FormDialog({
           />
           <br />
           {shouldDisplayError ? (
-            <span className="text-primary">
+            <span className="text-red-500">
               You already added this category!
             </span>
           ) : null}

@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { getDefaultClasses } from '..';
 import FormDialog from './FormDialog';
 
 export default function AddCategoryInput() {
@@ -17,7 +16,7 @@ export default function AddCategoryInput() {
   return (
     <li
       onClick={toggleDisplay}
-      className={`${getDefaultClasses()} underline`}
+      className="cursor-pointer hover:text-primary/50 transition-colors underline"
     >
       + Add category
     </li>

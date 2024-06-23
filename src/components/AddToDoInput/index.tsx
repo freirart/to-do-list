@@ -43,7 +43,7 @@ export default function AddToDoInput() {
           className={`px-5 py-2 w-full bg-slate-200 border outline-0 text-slate-600
           rounded-lg ${
             shouldDisplayError
-              ? 'border-primary'
+              ? 'border-red-500'
               : 'border-transparent'
           }`}
           onChange={disableErrorWhenStartTyping}
@@ -56,7 +56,7 @@ export default function AddToDoInput() {
         </button>
       </div>
       {shouldDisplayError ? (
-        <span className="text-primary">
+        <span className="text-red-500">
           You already added this to-do!
         </span>
       ) : null}
