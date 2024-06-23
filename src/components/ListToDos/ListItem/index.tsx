@@ -33,12 +33,14 @@ export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
         className="flex justify-between w-full py-2 ml-1 pl-2 rounded-lg
           hover:bg-slate-300/20"
       >
-        <div
-          data-done={done}
-          className="flex w-[90%] items-center transition-colors
-            data-[done=true]:line-through data-[done=true]:text-neutral-400"
-        >
-          {todo}
+        <div className="flex w-[90%] items-center transition-colors">
+          <span
+            data-done={done}
+            className="data-[done=true]:line-through data-[done=true]:text-neutral-400"
+          >
+            {todo}
+          </span>
+
           <CategoryDisplay todoId={id} />
         </div>
         <button
