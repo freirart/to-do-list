@@ -54,9 +54,13 @@ export default function CategoryDisplay({
       data-has-category={Boolean(todoCategory)}
       data-remove={todoCategory && shouldDisplayRemoveBtn}
       className="relative flex ml-2 rounded bg-slate-200
-        data-[has-category=true]:bg-primary
         data-[has-category=true]:text-slate-50 items-center px-1 text-sm pr-1
         data-[remove=true]:pr-4 cursor-pointer"
+      style={
+        todoCategory
+          ? { backgroundColor: rawCategories[todoCategory].color }
+          : {}
+      }
       onMouseEnter={() => setShouldDisplayRemoveBtn(true)}
       onMouseLeave={() => setShouldDisplayRemoveBtn(false)}
     >

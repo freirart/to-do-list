@@ -5,6 +5,7 @@ import {
 } from '../../../store/ToDoStore';
 import { CategoryInterface } from '..';
 import AddCategoryInput from './AddCategoryInput';
+import { CategoryColor } from '../../CategoryColor';
 
 interface ListItemInterface {
   item: CategoryInterface;
@@ -28,17 +29,19 @@ export default function ListItem({
     updateFilterName(itemParam.name);
   };
 
-  if (!item.children) {
+  const { children, name } = item;
+
+  if (!children) {
     return (
       <li
         data-is-child={isChild}
-        data-selected={!isChild && filterName === item.name}
+        data-selected={!isChild && filterName === name}
         className="cursor-pointer hover:text-primary/50 transition-colors
-          data-[selected=true]:text-primary data-[is-child=true]:underline
-          data-[is-child=true]:decoration-primary"
+          data-[selected=true]:text-primary"
         onClick={getOnClickFn(item)}
       >
-        {item.name}
+        <CategoryColor categoryName={name} proportion={2} />
+        {name}
       </li>
     );
   }
@@ -57,7 +60,7 @@ export default function ListItem({
         </summary>
         <ul className="text-lg leading-10">
           <AddCategoryInput />
-          {item.children.map((childrenItem, index) => (
+          {children.map((childrenItem, index) => (
             <ListItem isChild key={index} item={childrenItem} />
           ))}
         </ul>

@@ -1,3 +1,4 @@
+import { HexColor } from '../interfaces';
 import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
 import { isFilledArray } from '../utils/helper';
@@ -99,7 +100,7 @@ export const useCustomCategories = () => {
 export const useAddCustomCategory = () => {
   const [{ customCategories }, setState] = _useStore();
 
-  return (categoryName: CategoryName) => {
+  return (categoryName: CategoryName, color: HexColor) => {
     if (categoryName in customCategories) {
       throw new Error('Already added!');
     }
@@ -107,7 +108,7 @@ export const useAddCustomCategory = () => {
     setState((draft) => {
       draft.customCategories = {
         ...draft.customCategories,
-        [categoryName]: { color: 'primary', todoIds: [] }
+        [categoryName]: { color, todoIds: [] }
       };
     });
   };

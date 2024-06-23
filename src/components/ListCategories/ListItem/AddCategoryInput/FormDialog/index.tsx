@@ -1,5 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import { useAddCustomCategory } from '../../../../../store/ToDoStore';
+import { ColorSelector } from '../../../../ColorSelector';
+import { HexColor } from '../../../../../interfaces';
 
 interface FormDialogInterface {
   toggleDisplay: () => void;
@@ -8,30 +10,34 @@ interface FormDialogInterface {
 export default function FormDialog({
   toggleDisplay
 }: FormDialogInterface) {
-  const [shouldDisplayError, setShouldDisplayError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [newCategoryColor, setNewCategoryColor] =
+    useState<HexColor>('#EA5959');
 
   const addCustomCategory = useAddCustomCategory();
 
-  const newCategoryInput = useRef<HTMLInputElement>(null);
+  const newCategoryNameInput = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    const categoryName = newCategoryInput.current?.value;
+    const categoryName = newCategoryNameInput.current?.value;
 
-    if (categoryName) {
+    if (categoryName && newCategoryColor) {
       try {
-        addCustomCategory(categoryName);
+        addCustomCategory(categoryName, newCategoryColor);
         toggleDisplay();
       } catch (_) {
-        setShouldDisplayError(true);
+        setErrorMessage('You already added this category!');
       }
+    } else {
+      setErrorMessage('All fields are required!');
     }
   };
 
   const disableErrorWhenStartTyping = () => {
-    if (shouldDisplayError && newCategoryInput.current?.value) {
-      setShouldDisplayError(false);
+    if (errorMessage && newCategoryNameInput.current?.value) {
+      setErrorMessage('');
     }
   };
 
@@ -50,22 +56,23 @@ export default function FormDialog({
             id="new-category-name"
             autoFocus
             type="text"
+            data-error={!!errorMessage}
             placeholder="Ex:. College, Groceries, ..."
-            className={
-              `bg-slate-200 border outline-0 text-slate-600 rounded-md w-full p-2
-              my-2` +
-              (shouldDisplayError
-                ? ' border-red-500'
-                : ' border-transparent')
-            }
-            ref={newCategoryInput}
+            className="bg-slate-200 border outline-0 text-slate-600 rounded-md w-full p-2
+              my-2 data-[error=true]:border-red-500 border-transparent"
+            ref={newCategoryNameInput}
             onKeyDown={disableErrorWhenStartTyping}
           />
           <br />
-          {shouldDisplayError ? (
-            <span className="text-red-500">
-              You already added this category!
-            </span>
+          <label htmlFor="new-category-color">
+            Choose a color for the new category:
+          </label>
+          <ColorSelector
+            defaultColor={newCategoryColor}
+            setNewColor={(hexColor) => setNewCategoryColor(hexColor)}
+          />
+          {errorMessage ? (
+            <span className="text-red-500">{errorMessage}</span>
           ) : null}
           <div className="flex justify-end mt-4 absolute bottom-5 right-5">
             <button
