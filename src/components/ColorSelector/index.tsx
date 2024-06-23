@@ -2,7 +2,7 @@ import { ColorSelectorProps } from '../../interfaces';
 import { useColorSelector } from './hooks';
 import styles from './styles.module.less';
 
-const ColorSelector = ({
+export const ColorSelector = ({
   setNewColor,
   defaultColor
 }: ColorSelectorProps) => {
@@ -29,5 +29,3 @@ const ColorSelector = ({
     </div>
   );
 };
-
-export default ColorSelector;

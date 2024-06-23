@@ -1,5 +1,5 @@
 import { ReactFC } from '../../utils/interfaces';
-import ColorSelector from '../ColorSelector';
+import { ColorSelector } from '../ColorSelector';
 
 import { useBackground } from './hooks';
 
