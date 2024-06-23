@@ -216,6 +216,9 @@ export const useRemoveCustomCategory = () => {
     setState((draft) => {
       if (categoryName in draft.customCategories) {
         delete draft.customCategories[categoryName];
+
+        draft.filterFn = () => true;
+        draft.filterName = 'All';
       }
     });
   };
