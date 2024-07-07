@@ -1,7 +1,9 @@
+import ToDo from '../../models/ToDo';
 import {
   useCustomCategories,
   useDefineCategoryFilterFn
 } from '../../store/ToDoStore';
+import { isFilledArray } from '../../utils/helper';
 
 import { FilterFn } from '../../utils/interfaces';
 import ListItem from './ListItem';
@@ -22,10 +24,32 @@ export default function ListCategories() {
     { name: 'Done', filterFn: (todo) => Boolean(todo?.done) },
     {
       name: 'Categories',
-      children: Object.keys(customCategories).map((categoryName) => ({
-        name: categoryName,
-        filterFn: defineFilterFn(categoryName)
-      }))
+      children: [
+        {
+          name: 'Uncategorized',
+          filterFn: (todo?: ToDo) => {
+            const allToDoIds = Object.values(customCategories).map(
+              (c) => c.todoIds
+            );
+
+            return Boolean(
+              todo &&
+                allToDoIds.every(
+                  (todoIds) =>
+                    !(
+                      isFilledArray(todoIds) &&
+                      todoIds.includes(todo.id)
+                    )
+                )
+            );
+          }
+        }
+      ].concat(
+        Object.keys(customCategories).map((categoryName) => ({
+          name: categoryName,
+          filterFn: defineFilterFn(categoryName)
+        }))
+      )
     }
   ];
 
