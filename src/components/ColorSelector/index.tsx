@@ -17,7 +17,7 @@ export const ColorSelector = ({
     <div className="flex">
       {shouldShowGoDefaultBtn ? (
         <button className="text-sm mr-1" onClick={goDefault}>
-          Retornar para o padrão
+          Return to default
         </button>
       ) : null}
       <input
