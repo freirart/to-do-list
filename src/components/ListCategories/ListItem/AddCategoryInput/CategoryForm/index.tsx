@@ -17,9 +17,7 @@ export function CategoryForm({ toggleDisplay }: FormDialogInterface) {
 
   const newCategoryNameInput = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const categoryName = newCategoryNameInput.current?.value;
 
     if (categoryName && newCategoryColor) {

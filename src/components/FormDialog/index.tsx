@@ -1,7 +1,7 @@
 import { FormEvent, ReactNode } from 'react';
 
 interface FormDialogInterface {
-  handleSubmit: (e: FormEvent) => void;
+  handleSubmit: () => void;
   errorMessage?: string;
   cancelFn: () => void;
   submitBtnText: string;
@@ -9,12 +9,17 @@ interface FormDialogInterface {
 }
 
 export function FormDialog({
-  handleSubmit,
+  handleSubmit: customHandleSubmit,
   errorMessage,
   cancelFn,
   submitBtnText,
   children
 }: FormDialogInterface) {
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    customHandleSubmit();
+  };
+
   return (
     <dialog
       className="absolute top-0 flex items-center justify-center z-10 w-full h-full
