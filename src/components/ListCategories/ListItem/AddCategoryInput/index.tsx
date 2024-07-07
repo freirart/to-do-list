@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import FormDialog from './FormDialog';
+import { CategoryForm } from './CategoryForm';
 
 export default function AddCategoryInput() {
   const [willAddNewCategory, setWillAddNewCategory] = useState(false);
@@ -10,7 +10,7 @@ export default function AddCategoryInput() {
     );
 
   if (willAddNewCategory) {
-    return <FormDialog toggleDisplay={toggleDisplay} />;
+    return <CategoryForm toggleDisplay={toggleDisplay} />;
   }
 
   return (
