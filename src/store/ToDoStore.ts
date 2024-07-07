@@ -231,6 +231,26 @@ export const useRemoveCustomCategory = (
   };
 };
 
+export const useUpdateCategoryColor = (
+  categoryName: CategoryName
+) => {
+  const [{ customCategories }, setState] = _useStore();
+
+  const category = customCategories[categoryName];
+
+  if (!category) {
+    return null;
+  }
+
+  return (newColor: HexColor) => {
+    setState((draft) => {
+      if (categoryName in draft.customCategories) {
+        draft.customCategories[categoryName].color = newColor;
+      }
+    });
+  };
+};
+
 export const useFilterName = () => {
   const [{ filterName }] = _useStore();
 

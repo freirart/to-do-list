@@ -4,7 +4,8 @@ import styles from './styles.module.less';
 
 export const ColorSelector = ({
   setNewColor,
-  defaultColor
+  defaultColor,
+  hasReturnToDefaultBtn = true
 }: ColorSelectorProps) => {
   const {
     shouldShowGoDefaultBtn,
@@ -15,7 +16,7 @@ export const ColorSelector = ({
 
   return (
     <div className="flex">
-      {shouldShowGoDefaultBtn ? (
+      {hasReturnToDefaultBtn && shouldShowGoDefaultBtn ? (
         <button className="text-sm mr-1" onClick={goDefault}>
           Return to default
         </button>

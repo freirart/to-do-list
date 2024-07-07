@@ -1,5 +1,7 @@
+import { HexColor } from '../utils/interfaces';
+
 export interface Category {
-  color: string;
+  color: HexColor;
   todoIds: string[];
 }
 

@@ -4,11 +4,13 @@ import { useCustomCategories } from '../../store/ToDoStore';
 interface CategoryColorInterface {
   categoryName: string;
   proportion?: number;
+  onClick?: () => void;
 }
 
 export const CategoryColor = ({
   categoryName,
-  proportion = 4
+  proportion = 4,
+  onClick
 }: CategoryColorInterface) => {
   const categories = useCustomCategories();
 
@@ -24,12 +26,15 @@ export const CategoryColor = ({
   if (backgroundColor) {
     return (
       <span
-        className="rounded-full inline-block mr-2"
+        title={onClick ? 'Update category color' : ''}
+        data-onclick={!!onClick}
+        className="rounded-full inline-block mr-2 data-[onclick=true]:cursor-pointer"
         style={{
           backgroundColor,
           height: dimension,
           width: dimension
         }}
+        onClick={onClick ? onClick : () => {}}
       />
     );
   }

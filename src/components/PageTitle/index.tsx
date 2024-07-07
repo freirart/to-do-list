@@ -1,5 +1,5 @@
 import { useFilterName } from '../../store/ToDoStore';
-import { CategoryColor } from '../CategoryColor';
+import { PageTitleCategoryColor } from './PageTitleCategoryColor';
 import { RemoveCategoryButton } from './RemoveCategoryButton';
 
 export default function PageTitle() {
@@ -8,8 +8,8 @@ export default function PageTitle() {
   return (
     <header className="flex items-center justify-between">
       <div className="flex items-center">
-        <CategoryColor categoryName={filterName} proportion={4} />
-        <h1 className="text-3xl text-slate-950 font-semibold">
+        <h1 className="text-3xl text-slate-950 font-semibold flex items-center">
+          <PageTitleCategoryColor />
           {filterName} Tasks
         </h1>
       </div>
