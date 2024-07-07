@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { HexColor } from '../../interfaces';
+import { HexColor } from '../../utils/interfaces';
 
 interface StoredColor {
   hexColor: HexColor;

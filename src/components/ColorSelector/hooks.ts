@@ -1,5 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { ColorSelectorProps, HexColor } from '../../interfaces';
+
+import { ColorSelectorProps } from './interfaces';
+import { HexColor } from '../../utils/interfaces';
 
 export const useColorSelector = ({
   setNewColor,

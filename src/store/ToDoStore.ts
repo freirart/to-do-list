@@ -1,8 +1,7 @@
-import { HexColor } from '../interfaces';
 import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
 import { isFilledArray } from '../utils/helper';
-import { FilterFn } from '../utils/interfaces';
+import { FilterFn, HexColor } from '../utils/interfaces';
 
 import Store from './';
 

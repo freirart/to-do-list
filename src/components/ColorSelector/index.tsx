@@ -1,5 +1,5 @@
-import { ColorSelectorProps } from '../../interfaces';
 import { useColorSelector } from './hooks';
+import { ColorSelectorProps } from './interfaces';
 import styles from './styles.module.less';
 
 export const ColorSelector = ({

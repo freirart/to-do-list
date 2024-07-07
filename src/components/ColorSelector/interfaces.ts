@@ -1,4 +1,4 @@
-export type HexColor = `#${string}`;
+import { HexColor } from '../../utils/interfaces';
 
 export interface ColorSelectorProps {
   setNewColor: (hexColor: HexColor, varColor: string) => void;

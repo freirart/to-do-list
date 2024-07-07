@@ -1,7 +1,7 @@
 import { FormEvent, useRef, useState } from 'react';
 import { useAddCustomCategory } from '../../../../../store/ToDoStore';
 import { ColorSelector } from '../../../../ColorSelector';
-import { HexColor } from '../../../../../interfaces';
+import { HexColor } from '../../../../../utils/interfaces';
 
 interface FormDialogInterface {
   toggleDisplay: () => void;
