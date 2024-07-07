@@ -41,7 +41,12 @@ export function CategoryForm({ toggleDisplay }: FormDialogInterface) {
   };
 
   return (
-    <FormDialog handleSubmit={handleSubmit}>
+    <FormDialog
+      handleSubmit={handleSubmit}
+      errorMessage={errorMessage}
+      cancelFn={toggleDisplay}
+      submitBtnText="Submit"
+    >
       <label htmlFor="new-category-name">
         How will the new category be called?
       </label>
@@ -65,25 +70,6 @@ export function CategoryForm({ toggleDisplay }: FormDialogInterface) {
         defaultColor={newCategoryColor}
         setNewColor={(hexColor) => setNewCategoryColor(hexColor)}
       />
-      {errorMessage ? (
-        <span className="text-red-500">{errorMessage}</span>
-      ) : null}
-      <div className="flex justify-end mt-4 absolute bottom-5 right-5">
-        <button
-          type="button"
-          className="px-3 py-2 bg-slate-200 hover:bg-slate-200/75 text-slate-600 rounded-lg"
-          onClick={() => toggleDisplay()}
-        >
-          Cancel
-        </button>
-        <button
-          className="px-3 py-2 bg-green-500 hover:bg-green-500/75 text-slate-50 ml-2
-            rounded-lg"
-          type="submit"
-        >
-          Submit
-        </button>
-      </div>
     </FormDialog>
   );
 }

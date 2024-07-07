@@ -1,12 +1,9 @@
-import {
-  useFilterName,
-  useRemoveCustomCategory
-} from '../../store/ToDoStore';
+import { useFilterName } from '../../store/ToDoStore';
 import { CategoryColor } from '../CategoryColor';
+import { RemoveCategoryButton } from './RemoveCategoryButton';
 
 export default function PageTitle() {
   const filterName = useFilterName();
-  const removeCategory = useRemoveCustomCategory(filterName);
 
   return (
     <header className="flex items-center justify-between">
@@ -17,14 +14,7 @@ export default function PageTitle() {
         </h1>
       </div>
 
-      {removeCategory ? (
-        <span
-          className="underline text-sm cursor-pointer"
-          onClick={removeCategory}
-        >
-          Remover categoria
-        </span>
-      ) : null}
+      <RemoveCategoryButton />
     </header>
   );
 }
