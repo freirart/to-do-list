@@ -208,10 +208,18 @@ export const useUncategorizeToDo = () => {
   };
 };
 
-export const useRemoveCustomCategory = () => {
-  const [_, setState] = _useStore();
+export const useRemoveCustomCategory = (
+  categoryName: CategoryName
+) => {
+  const [{ customCategories }, setState] = _useStore();
 
-  return (categoryName: CategoryName) => {
+  const category = customCategories[categoryName];
+
+  if (!category) {
+    return null;
+  }
+
+  return () => {
     setState((draft) => {
       if (categoryName in draft.customCategories) {
         delete draft.customCategories[categoryName];

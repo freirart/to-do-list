@@ -6,7 +6,7 @@ import { CategoryColor } from '../CategoryColor';
 
 export default function PageTitle() {
   const filterName = useFilterName();
-  const removeCategory = useRemoveCustomCategory();
+  const removeCategory = useRemoveCustomCategory(filterName);
 
   return (
     <header className="flex items-center justify-between">
@@ -17,12 +17,14 @@ export default function PageTitle() {
         </h1>
       </div>
 
-      <span
-        className="underline text-sm cursor-pointer"
-        onClick={() => removeCategory(filterName)}
-      >
-        Remover categoria
-      </span>
+      {removeCategory ? (
+        <span
+          className="underline text-sm cursor-pointer"
+          onClick={removeCategory}
+        >
+          Remover categoria
+        </span>
+      ) : null}
     </header>
   );
 }
