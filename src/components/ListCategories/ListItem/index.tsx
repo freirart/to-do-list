@@ -37,7 +37,7 @@ export default function ListItem({
         data-is-child={isChild}
         data-selected={!isChild && filterName === name}
         className="cursor-pointer hover:text-primary/50 transition-colors
-          data-[selected=true]:text-primary"
+          data-[selected=true]:text-primary flex items-center"
         onClick={getOnClickFn(item)}
       >
         <CategoryColor categoryName={name} proportion={2} />

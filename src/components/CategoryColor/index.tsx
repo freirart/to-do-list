@@ -3,12 +3,12 @@ import { useCustomCategories } from '../../store/ToDoStore';
 
 interface CategoryColorInterface {
   categoryName: string;
-  proportion: number;
+  proportion?: number;
 }
 
 export const CategoryColor = ({
   categoryName,
-  proportion
+  proportion = 4
 }: CategoryColorInterface) => {
   const categories = useCustomCategories();
 
@@ -19,13 +19,17 @@ export const CategoryColor = ({
     keyName ? categories[keyName] : {}
   ) as Category;
 
-  const proportionsClass = `h-${proportion} w-${proportion}`;
+  const dimension = `${proportion * 4}px`;
 
   if (backgroundColor) {
     return (
       <span
-        className={`rounded-full inline-block mr-2 ${proportionsClass}`}
-        style={{ backgroundColor }}
+        className="rounded-full inline-block mr-2"
+        style={{
+          backgroundColor,
+          height: dimension,
+          width: dimension
+        }}
       />
     );
   }
