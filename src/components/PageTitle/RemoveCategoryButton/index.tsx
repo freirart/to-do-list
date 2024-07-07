@@ -27,7 +27,7 @@ export function RemoveCategoryButton() {
         className="underline text-sm cursor-pointer"
         onClick={() => setDisplayRemovalConfirmation(true)}
       >
-        Remover categoria
+        Remove category
       </span>
       {displayRemovalConfirmation ? (
         <FormDialog
