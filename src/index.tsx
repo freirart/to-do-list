@@ -5,7 +5,7 @@ import ListToDos from './components/ListToDos';
 import PageTitle from './components/PageTitle';
 
 import Store from './store';
-import { initialState } from './store/ToDoStore';
+import { initialState } from './store/hooks';
 
 export default function ToDoApp() {
   return (

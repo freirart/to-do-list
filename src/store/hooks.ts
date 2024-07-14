@@ -3,7 +3,7 @@ import ToDo from '../models/ToDo';
 import { isFilledArray } from '../utils/helper';
 import { FilterFn, HexColor } from '../utils/interfaces';
 
-import Store from './';
+import Store from '.';
 
 interface StoreInterface {
   todos: ToDo[];

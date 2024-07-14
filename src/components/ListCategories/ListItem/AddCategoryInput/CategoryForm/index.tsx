@@ -1,5 +1,5 @@
 import { FormEvent, useRef, useState } from 'react';
-import { useAddCustomCategory } from '../../../../../store/ToDoStore';
+import { useAddCustomCategory } from '../../../../../store/hooks';
 import { ColorSelector } from '../../../../ColorSelector';
 import { HexColor } from '../../../../../utils/interfaces';
 import { FormDialog } from '../../../../FormDialog';

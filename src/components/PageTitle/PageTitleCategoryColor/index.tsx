@@ -3,7 +3,7 @@ import {
   useCustomCategories,
   useFilterName,
   useUpdateCategoryColor
-} from '../../../store/ToDoStore';
+} from '../../../store/hooks';
 import { CategoryColor } from '../../CategoryColor';
 import { FormDialog } from '../../FormDialog';
 import { ColorSelector } from '../../ColorSelector';

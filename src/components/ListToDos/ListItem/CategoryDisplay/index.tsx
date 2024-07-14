@@ -3,7 +3,7 @@ import {
   useCustomCategories,
   useCategorizeToDo,
   useUncategorizeToDo
-} from '../../../../store/ToDoStore';
+} from '../../../../store/hooks';
 import { isFilledArray } from '../../../../utils/helper';
 import CustomSelect from '../../../CustomSelect';
 

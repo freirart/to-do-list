@@ -1,7 +1,4 @@
-import {
-  useFilterName,
-  useFilteredToDos
-} from '../../store/ToDoStore';
+import { useFilterName, useFilteredToDos } from '../../store/hooks';
 import ListItem from './ListItem';
 
 export default function ListToDos() {

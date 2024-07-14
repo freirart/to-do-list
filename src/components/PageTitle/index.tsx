@@ -1,4 +1,4 @@
-import { useFilterName } from '../../store/ToDoStore';
+import { useFilterName } from '../../store/hooks';
 import { PageTitleCategoryColor } from './PageTitleCategoryColor';
 import { RemoveCategoryButton } from './RemoveCategoryButton';
 

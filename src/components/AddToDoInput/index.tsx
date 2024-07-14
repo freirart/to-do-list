@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useRef, useState } from 'react';
-import { useAddToDo } from '../../store/ToDoStore';
+import { useAddToDo } from '../../store/hooks';
 import ToDo from '../../models/ToDo';
 
 export default function AddToDoInput() {

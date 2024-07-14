@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {
   useFilterName,
   useRemoveCustomCategory
-} from '../../../store/ToDoStore';
+} from '../../../store/hooks';
 import { FormDialog } from '../../FormDialog';
 
 export function RemoveCategoryButton() {
