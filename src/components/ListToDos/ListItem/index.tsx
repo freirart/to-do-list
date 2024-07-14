@@ -1,7 +1,7 @@
 import ToDo from '../../../models/ToDo';
 import {
   useRemoveToDo,
-  useToggleIsTodoDone
+  useToggleIsToDoDone
 } from '../../../store/ToDoStore';
 import { LiaTrashSolid } from 'react-icons/lia';
 import CategoryDisplay from './CategoryDisplay';
@@ -9,7 +9,7 @@ import CategoryDisplay from './CategoryDisplay';
 export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
   const { id, todo, done } = todoProp;
   const removeToDo = useRemoveToDo();
-  const toggleTodo = useToggleIsTodoDone();
+  const toggleToDo = useToggleIsToDoDone();
 
   return (
     <div className="flex my-2 flex-nowrap items-center">
@@ -18,7 +18,7 @@ export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
           className="h-0 w-0 opacity-0"
           defaultChecked={done}
           type="checkbox"
-          onClick={() => toggleTodo(id, done)}
+          onClick={() => toggleToDo(id, done)}
         />
         <span
           className={`flex justify-center items-center h-7 w-7 rounded-lg border
