@@ -1,9 +1,13 @@
-import { ReactFC } from '../../utils/interfaces';
+import { ReactNode } from 'react';
 import { ColorSelector } from '../ColorSelector';
 
 import { useBackground } from './hooks';
 
-const Background: ReactFC = ({ children }) => {
+interface BackgroundInterface {
+  children: ReactNode;
+}
+
+const Background = ({ children }: BackgroundInterface) => {
   const { handleUpdatePrimaryColor, defaultColor } = useBackground();
 
   return (
