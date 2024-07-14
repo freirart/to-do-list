@@ -140,46 +140,39 @@ export const useCategorizeToDo = () => {
   const defineFilterFn = useDefineCategoryFilterFn();
 
   return (categoryName: CategoryName, todoId: string) => {
-    if (todos.find((t) => t.id === todoId)) {
-      if (categoryName in customCategories) {
-        const categoriesToUpdate = Object.keys(
-          customCategories
-        ).filter((c) => {
-          const categoryTodoIds = customCategories[c].todoIds;
-
-          return (
-            isFilledArray(categoryTodoIds) &&
-            categoryTodoIds.includes(todoId)
-          );
-        });
-
-        setState((draft) => {
-          for (const category of categoriesToUpdate) {
-            draft.customCategories[category].todoIds =
-              draft.customCategories[category].todoIds.filter(
-                (id) => id !== todoId
-              );
-          }
-
-          draft.customCategories[categoryName].todoIds.push(todoId);
-
-          if (filterName in customCategories) {
-            const updatedCategories = JSON.parse(
-              JSON.stringify(draft.customCategories)
-            ) as CategoryTypeObject;
-
-            draft.filterFn = defineFilterFn(
-              categoriesToUpdate[0],
-              updatedCategories
-            );
-          }
-        });
-      } else {
-        throw new Error('Category does not exist!');
-      }
-    } else {
+    if (!todos.find((t) => t.id === todoId)) {
       throw new Error('Todo does not exist!');
     }
+
+    if (!(categoryName in customCategories)) {
+      throw new Error('Category does not exist!');
+    }
+
+    const previousTodoCategory = Object.keys(customCategories).find(
+      (c) => customCategories[c].todoIds.includes(todoId)
+    );
+
+    setState((draft) => {
+      if (previousTodoCategory) {
+        draft.customCategories[previousTodoCategory].todoIds =
+          draft.customCategories[previousTodoCategory].todoIds.filter(
+            (id) => id !== todoId
+          );
+
+        if (filterName in customCategories) {
+          const updatedCategories = JSON.parse(
+            JSON.stringify(draft.customCategories)
+          ) as CategoryTypeObject;
+
+          draft.filterFn = defineFilterFn(
+            previousTodoCategory,
+            updatedCategories
+          );
+        }
+      }
+
+      draft.customCategories[categoryName].todoIds.push(todoId);
+    });
   };
 };
 
