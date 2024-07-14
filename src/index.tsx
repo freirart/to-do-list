@@ -4,8 +4,8 @@ import ListCategories from './components/ListCategories';
 import ListToDos from './components/ListToDos';
 import PageTitle from './components/PageTitle';
 
-import Store from './store';
-import { initialState } from './store/hooks';
+import Store from './utils/store';
+import { initialState } from './utils/hooks';
 
 export default function ToDoApp() {
   return (

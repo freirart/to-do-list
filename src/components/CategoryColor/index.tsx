@@ -1,5 +1,5 @@
 import { Category } from '../../models/Category';
-import { useCustomCategories } from '../../store/hooks';
+import { useCustomCategories } from '../../utils/hooks';
 
 interface CategoryColorInterface {
   categoryName: string;

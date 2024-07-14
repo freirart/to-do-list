@@ -2,7 +2,7 @@ import ToDo from '../../../models/ToDo';
 import {
   useRemoveToDo,
   useToggleIsToDoDone
-} from '../../../store/hooks';
+} from '../../../utils/hooks';
 import { LiaTrashSolid } from 'react-icons/lia';
 import CategoryDisplay from './CategoryDisplay';
 

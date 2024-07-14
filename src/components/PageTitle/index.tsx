@@ -1,4 +1,4 @@
-import { useFilterName } from '../../store/hooks';
+import { useFilterName } from '../../utils/hooks';
 import { PageTitleCategoryColor } from './PageTitleCategoryColor';
 import { RemoveCategoryButton } from './RemoveCategoryButton';
 

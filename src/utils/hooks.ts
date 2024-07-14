@@ -1,9 +1,9 @@
 import CategoryTypeObject, { CategoryName } from '../models/Category';
 import ToDo from '../models/ToDo';
-import { isFilledArray } from '../utils/helper';
-import { FilterFn, HexColor } from '../utils/interfaces';
+import { isFilledArray } from './helper';
+import { FilterFn, HexColor } from './interfaces';
 
-import Store from '.';
+import Store from './store';
 
 interface StoreInterface {
   todos: ToDo[];

@@ -2,7 +2,7 @@ import {
   useFilterName,
   useUpdateFilterName,
   useUpdateFilterFn
-} from '../../../store/hooks';
+} from '../../../utils/hooks';
 import { CategoryInterface } from '..';
 import AddCategoryInput from './AddCategoryInput';
 import { CategoryColor } from '../../CategoryColor';
