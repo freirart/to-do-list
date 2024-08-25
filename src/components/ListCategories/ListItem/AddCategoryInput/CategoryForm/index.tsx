@@ -1,4 +1,4 @@
-import { FormEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useAddCustomCategory } from '../../../../../utils/hooks';
 import { ColorSelector } from '../../../../ColorSelector';
 import { HexColor } from '../../../../../utils/interfaces';
