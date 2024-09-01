@@ -1,6 +1,6 @@
 import AddToDoInput from './components/AddToDoInput';
 import Background from './components/Background';
-import ListCategories from './components/ListCategories';
+import { ListCategories } from './components/ListCategories';
 import ListToDos from './components/ListToDos';
 import PageTitle from './components/PageTitle';
 

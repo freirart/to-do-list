@@ -9,3 +9,13 @@ export interface CategoryColorInterface {
   proportion?: number;
   onClick?: () => void;
 }
+
+export interface CategoryInterface {
+  name: string;
+  filterFn?: FilterFn;
+  children?: CategoryInterface[];
+}
+
+export interface FormDialogInterface {
+  toggleDisplay: () => void;
+}

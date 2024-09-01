@@ -1,33 +1,15 @@
-import {
-  useFilterName,
-  useUpdateFilterName,
-  useUpdateFilterFn
-} from '../../../utils/hooks';
-import { CategoryInterface } from '..';
-import AddCategoryInput from './AddCategoryInput';
+import { AddCategoryInput } from './AddCategoryInput';
 import { CategoryColor } from '../../CategoryColor';
+import type { CategoryInterface } from '../../../utils/interfaces';
+import { useListItem } from './hooks';
 
 interface ListItemInterface {
   item: CategoryInterface;
   isChild?: boolean;
 }
 
-export default function ListItem({
-  item,
-  isChild
-}: ListItemInterface) {
-  const filterName = useFilterName();
-  const updateFilterName = useUpdateFilterName();
-
-  const updateFilterFn = useUpdateFilterFn();
-
-  const getOnClickFn = (itemParam: CategoryInterface) => () => {
-    if (itemParam.filterFn) {
-      updateFilterFn(itemParam.filterFn);
-    }
-
-    updateFilterName(itemParam.name);
-  };
+export function ListItem({ item, isChild }: ListItemInterface) {
+  const { filterName, getOnClickFn } = useListItem();
 
   const { children, name } = item;
 
