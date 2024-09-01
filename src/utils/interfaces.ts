@@ -19,3 +19,7 @@ export interface CategoryInterface {
 export interface FormDialogInterface {
   toggleDisplay: () => void;
 }
+
+export interface CategoryDisplayInterface {
+  todoId: string;
+}

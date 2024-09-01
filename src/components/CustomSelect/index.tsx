@@ -32,7 +32,7 @@ interface SelectInterface {
   onBlurCb: () => void;
 }
 
-export default function CustomSelect({
+export function CustomSelect({
   options,
   optionNotFoundMessage,
   selectedVal,

@@ -4,9 +4,9 @@ import {
   useToggleIsToDoDone
 } from '../../../utils/hooks';
 import { LiaTrashSolid } from 'react-icons/lia';
-import CategoryDisplay from './CategoryDisplay';
+import { CategoryDisplay } from './CategoryDisplay';
 
-export default function ListItem({ todo: todoProp }: { todo: ToDo }) {
+export function ListItem({ todo: todoProp }: { todo: ToDo }) {
   const { id, todo, done } = todoProp;
   const removeToDo = useRemoveToDo();
   const toggleToDo = useToggleIsToDoDone();
