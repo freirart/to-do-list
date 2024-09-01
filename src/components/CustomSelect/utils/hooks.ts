@@ -11,13 +11,15 @@ import { getFilteredOptions } from './auxiliarFunctions';
 interface StoreInterface {
   isDropDownShown: boolean;
   optionNotFound: ReactNode;
+  filteredOptions: string[];
 }
 
 const _useStore = () => Store.useStore<StoreInterface>();
 
 export const initialState: StoreInterface = {
   isDropDownShown: false,
-  optionNotFound: 'Option not found 😢'
+  optionNotFound: 'Option not found 😢',
+  filteredOptions: []
 };
 
 export const useIsDropDownShown = () => {
@@ -52,6 +54,22 @@ export const useUpdateOptionNotFound = () => {
   };
 };
 
+export const useFilteredOptions = () => {
+  const [{ filteredOptions }] = _useStore();
+
+  return filteredOptions;
+};
+
+export const useUpdateFilteredOptions = () => {
+  const [_, setState] = _useStore();
+
+  return (newFilteredOptions: string[]) => {
+    setState((draft) => {
+      draft.filteredOptions = newFilteredOptions;
+    });
+  };
+};
+
 export const useCustomSelect = ({
   options,
   optionNotFoundMessage,
@@ -59,10 +77,11 @@ export const useCustomSelect = ({
   onSelect,
   onBlurCb
 }: SelectInterface) => {
-  const isDropDownShown = useIsDropDownShown();
-  const updateIsDropDownShown = useUpdateIsDropDownShown();
   const optionNotFound = useOptionNotFound();
+
+  const updateIsDropDownShown = useUpdateIsDropDownShown();
   const updateOptionNotFound = useUpdateOptionNotFound();
+  const updateFilteredOptions = useUpdateFilteredOptions();
 
   const [filter, setFilter] = useState(selectedVal ?? '');
 
@@ -75,11 +94,11 @@ export const useCustomSelect = ({
     }
   }, [optionNotFoundMessage]);
 
-  const filteredOptions = getFilteredOptions(
-    filter,
-    options,
-    selectedVal
-  );
+  useEffect(() => {
+    updateFilteredOptions(
+      getFilteredOptions(filter, options, selectedVal)
+    );
+  }, [filter, options, selectedVal]);
 
   const handleBlur = () => {
     // once the user selects, the input blur triggers first
@@ -105,9 +124,6 @@ export const useCustomSelect = ({
     onChange,
     onFocus,
     handleBlur,
-    isDropDownShown,
-    filteredOptions,
-    handleSelect,
-    optionNotFound
+    handleSelect
   };
 };
