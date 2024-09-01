@@ -1,4 +1,11 @@
-# Curso "React JS - The Complete Guide 2024" pela Academind
+# To-do List
+
+Lista de tarefas desenvolvida com o propósito de pôr em prática os conhecimentos obtidos sobre Redux, ContextAPI, e Typescript.
+
+O artigo dedicado a apresentar o processo de desenvolvimento do jogo pode ser encontrado [neste link](https://medium.com/@freirart/como-eu-constru%C3%AD-do-zero-um-jogo-para-plataformas-web-618589702a94)!
+
+Este repositório abrange o conteúdo apresentado na seção 30 "React + Typescript " do curso
+["React - The Complete Guide 2024"](https://www.udemy.com/course/react-the-complete-guide-incl-redux/):
 
 ## Anotações 🗒
 
