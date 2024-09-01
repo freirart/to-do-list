@@ -1,13 +1,13 @@
-import AddToDoInput from './components/AddToDoInput';
-import Background from './components/Background';
+import { AddToDoInput } from './components/AddToDoInput';
+import { Background } from './components/Background';
 import { ListCategories } from './components/ListCategories';
 import { ListToDos } from './components/ListToDos';
-import PageTitle from './components/PageTitle';
+import { PageTitle } from './components/PageTitle';
 
 import Store from './utils/store';
 import { initialState } from './utils/hooks';
 
-export default function ToDoApp() {
+export function ToDoApp() {
   return (
     <Background>
       <Store.Provider initialState={initialState}>

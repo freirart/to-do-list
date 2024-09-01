@@ -7,6 +7,4 @@ export interface Category {
 
 export type CategoryName = string;
 
-type CategoryTypeObject = Record<CategoryName, Category>;
-
-export default CategoryTypeObject;
+export type CategoryTypeObject = Record<CategoryName, Category>;

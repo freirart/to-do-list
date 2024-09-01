@@ -1,6 +1,6 @@
 import { useAddToDoInput } from './hooks';
 
-export default function AddToDoInput() {
+export function AddToDoInput() {
   const {
     handleSubmit,
     inputField,
