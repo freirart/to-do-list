@@ -1,13 +1,8 @@
-import { useState } from 'react';
 import { CategoryForm } from './CategoryForm';
+import { useAddCategoryInput } from './hooks';
 
-export default function AddCategoryInput() {
-  const [willAddNewCategory, setWillAddNewCategory] = useState(false);
-
-  const toggleDisplay = () =>
-    setWillAddNewCategory(
-      (prevWillAddNewCategory) => !prevWillAddNewCategory
-    );
+export function AddCategoryInput() {
+  const { willAddNewCategory, toggleDisplay } = useAddCategoryInput();
 
   if (willAddNewCategory) {
     return <CategoryForm toggleDisplay={toggleDisplay} />;

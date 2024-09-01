@@ -2,7 +2,7 @@ import { useFilterName } from '../../utils/hooks';
 import { PageTitleCategoryColor } from './PageTitleCategoryColor';
 import { RemoveCategoryButton } from './RemoveCategoryButton';
 
-export default function PageTitle() {
+export function PageTitle() {
   const filterName = useFilterName();
 
   return (

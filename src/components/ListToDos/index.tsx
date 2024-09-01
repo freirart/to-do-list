@@ -1,9 +1,8 @@
-import { useFilterName, useFilteredToDos } from '../../utils/hooks';
-import ListItem from './ListItem';
+import { useListToDos } from './hooks';
+import { ListItem } from './ListItem';
 
-export default function ListToDos() {
-  const filteredToDos = useFilteredToDos();
-  const filterName = useFilterName();
+export function ListToDos() {
+  const { filteredToDos, emptyMessage } = useListToDos();
 
   return (
     <>
@@ -17,9 +16,7 @@ export default function ListToDos() {
         </ul>
       ) : (
         <div className="flex h-full items-center justify-center text-neutral-400">
-          {filterName === 'All'
-            ? "It looks like you haven't add any to-dos :("
-            : `There are no to-dos in "${filterName}".`}
+          {emptyMessage}
         </div>
       )}
     </>

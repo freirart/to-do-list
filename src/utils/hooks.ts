@@ -1,7 +1,10 @@
-import CategoryTypeObject, { CategoryName } from '../models/Category';
+import type {
+  CategoryName,
+  CategoryTypeObject
+} from '../models/Category';
 import ToDo from '../models/ToDo';
 import { isFilledArray } from './helper';
-import { FilterFn, HexColor } from './interfaces';
+import type { FilterFn, HexColor } from './interfaces';
 
 import Store from './store';
 

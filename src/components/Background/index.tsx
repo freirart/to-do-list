@@ -7,7 +7,7 @@ interface BackgroundInterface {
   children: ReactNode;
 }
 
-const Background = ({ children }: BackgroundInterface) => {
+export const Background = ({ children }: BackgroundInterface) => {
   const { handleUpdatePrimaryColor, defaultColor } = useBackground();
 
   return (
@@ -25,5 +25,3 @@ const Background = ({ children }: BackgroundInterface) => {
     </div>
   );
 };
-
-export default Background;

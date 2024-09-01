@@ -1,42 +1,17 @@
-import { useRef, useState } from 'react';
-import { useAddCustomCategory } from '../../../../../utils/hooks';
+import type { FormDialogInterface } from '../../../../../utils/interfaces';
 import { ColorSelector } from '../../../../ColorSelector';
-import { HexColor } from '../../../../../utils/interfaces';
 import { FormDialog } from '../../../../FormDialog';
-
-interface FormDialogInterface {
-  toggleDisplay: () => void;
-}
+import { useCategoryForm } from './hooks';
 
 export function CategoryForm({ toggleDisplay }: FormDialogInterface) {
-  const [errorMessage, setErrorMessage] = useState('');
-  const [newCategoryColor, setNewCategoryColor] =
-    useState<HexColor>('#EA5959');
-
-  const addCustomCategory = useAddCustomCategory();
-
-  const newCategoryNameInput = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = () => {
-    const categoryName = newCategoryNameInput.current?.value;
-
-    if (categoryName && newCategoryColor) {
-      try {
-        addCustomCategory(categoryName, newCategoryColor);
-        toggleDisplay();
-      } catch (_) {
-        setErrorMessage('You already added this category!');
-      }
-    } else {
-      setErrorMessage('All fields are required!');
-    }
-  };
-
-  const disableErrorWhenStartTyping = () => {
-    if (errorMessage && newCategoryNameInput.current?.value) {
-      setErrorMessage('');
-    }
-  };
+  const {
+    handleSubmit,
+    disableErrorWhenStartTyping,
+    errorMessage,
+    newCategoryNameInput,
+    setNewColor,
+    newCategoryColor
+  } = useCategoryForm(toggleDisplay);
 
   return (
     <FormDialog
@@ -66,7 +41,7 @@ export function CategoryForm({ toggleDisplay }: FormDialogInterface) {
       </label>
       <ColorSelector
         defaultColor={newCategoryColor}
-        setNewColor={(hexColor) => setNewCategoryColor(hexColor)}
+        setNewColor={setNewColor}
       />
     </FormDialog>
   );
