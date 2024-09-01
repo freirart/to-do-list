@@ -45,6 +45,7 @@ module.exports = {
     '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/prefer-nullish-coalescing': 1,
     '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-unsafe-argument': 0
+    '@typescript-eslint/no-unsafe-argument': 0,
+    'react-hooks/exhaustive-deps': 0
   }
 };

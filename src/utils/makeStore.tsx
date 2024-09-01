@@ -11,7 +11,7 @@ import {
 
 import { useImmer } from 'use-immer';
 
-export default function makeStore() {
+export default function makeStore(localStorageKey = '') {
   type ContextType = [object, Dispatch<SetStateAction<any>>] | null;
 
   const context = createContext<ContextType>(null);
@@ -28,7 +28,9 @@ export default function makeStore() {
     );
 
     useEffect(() => {
-      localStorage.setItem('appState', JSON.stringify(state));
+      if (localStorageKey) {
+        localStorage.setItem(localStorageKey, JSON.stringify(state));
+      }
     }, [state]);
 
     return (

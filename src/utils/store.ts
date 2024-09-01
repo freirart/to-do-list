@@ -1,3 +1,3 @@
 import makeStore from './makeStore';
 
-export default makeStore();
+export default makeStore('appState');

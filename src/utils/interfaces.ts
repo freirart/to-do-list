@@ -1,4 +1,5 @@
-import ToDo from '../models/ToDo';
+import type { ReactNode } from 'react';
+import type ToDo from '../models/ToDo';
 
 export type FilterFn = (todo?: ToDo) => boolean;
 
@@ -22,4 +23,14 @@ export interface FormDialogInterface {
 
 export interface CategoryDisplayInterface {
   todoId: string;
+}
+
+export type SelectedValType = string | null | undefined;
+
+export interface SelectInterface {
+  options: string[];
+  selectedVal: SelectedValType;
+  onSelect: (newSelectedVal: string) => void;
+  optionNotFoundMessage?: ReactNode;
+  onBlurCb: () => void;
 }
