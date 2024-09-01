@@ -1,40 +1,18 @@
-import { Category } from '../../models/Category';
-import { useCustomCategories } from '../../utils/hooks';
+import type { CategoryColorInterface } from '../../utils/interfaces';
+import { useCategoryColor } from './hooks';
 
-interface CategoryColorInterface {
-  categoryName: string;
-  proportion?: number;
-  onClick?: () => void;
-}
-
-export const CategoryColor = ({
-  categoryName,
-  proportion = 4,
-  onClick
-}: CategoryColorInterface) => {
-  const categories = useCustomCategories();
-
-  const keyName = Object.keys(categories).find(
-    (kn) => kn === categoryName
-  );
-  const { color: backgroundColor } = (
-    keyName ? categories[keyName] : {}
-  ) as Category;
-
-  const dimension = `${proportion * 4}px`;
+export const CategoryColor = (props: CategoryColorInterface) => {
+  const { backgroundColor, title, style, customOnClick } =
+    useCategoryColor(props);
 
   if (backgroundColor) {
     return (
       <span
-        title={onClick ? 'Update category color' : ''}
-        data-onclick={!!onClick}
+        title={title}
+        data-onclick={!!props.onClick}
         className="rounded-full inline-block mr-2 data-[onclick=true]:cursor-pointer"
-        style={{
-          backgroundColor,
-          height: dimension,
-          width: dimension
-        }}
-        onClick={onClick ? onClick : () => {}}
+        style={style}
+        onClick={customOnClick}
       />
     );
   }
